@@ -156,14 +156,32 @@ Progress: 0
 
 ## Evidence & Testing
 
-This repository will contain verified evidence from the actual workflow:
+## Evidence & Verified Visual Proof
 
-- n8n full workflow overview
-- Node configurations & execution evidence
-- Campaign intake & AI output data
-- Google Sheets final data store screenshots
+This repository contains verified operational captures from the actual self-hosted n8n workflow execution and multi-tab database sync:
 
-All screenshots and examples are based on the actual portfolio project workflow.
+### 1. Multi-Agent Workflow Canvas & Architecture
+| Full Workflow Canvas (58 Nodes) | 9-Agent Stack Architecture |
+| :---: | :---: |
+| ![Full Canvas](screenshots/Screenshot%202026-09-01%20233758.png) | ![Agent Stack](screenshots/Screenshot%202026-09-01%20233825.png) |
+
+### 2. Live Execution & Node Output
+| Platform Execution Detail |
+| :---: |
+| ![Canvas Detail](screenshots/Screenshot%202026-09-06%20235051.png) |
+
+### 3. Google Sheets Multi-Tab Master Database Records
+| Campaign Master Tab | Research Results Tab |
+| :---: | :---: |
+| ![Campaign Master](screenshots/Screenshot%202026-10-08%20235921.png) | ![Research Results](screenshots/Screenshot%202026-10-08%20235848.jpg) |
+
+| Content Assets Tab | Approval Log Sync Tab |
+| :---: | :---: |
+| ![Content Assets](screenshots/Screenshot%202026-10-08%20235821.jpg) | ![Approval Log](screenshots/Screenshot%202026-10-08%20235752.jpg) |
+
+| Execution Audit Log | Analytics & Performance Summary |
+| :---: | :---: |
+| ![Execution Log](screenshots/Screenshot%202026-10-08%20235718.jpg) | ![Analytics](screenshots/Screenshot%202026-10-08%20235655.png) |
 
 ## Project Scope
 
