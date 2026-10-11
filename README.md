@@ -171,17 +171,18 @@ This repository contains verified operational captures from the actual self-host
 | ![Canvas Detail](screenshots/Screenshot%202026-09-06%20235051.png) |
 
 ### 3. Google Sheets Multi-Tab Master Database Records
+
 | Campaign Master Tab | Research Results Tab |
 | :---: | :---: |
-| ![Campaign Master](screenshots/Screenshot%202026-10-08%20235921.png) | ![Research Results](screenshots/Screenshot%202026-10-08%20235848.jpg) |
+| ![Campaign Master](screenshots/Screenshot%202026-10-08%20235921.png) | ![Research Results](screenshots/Screenshot%202026-10-08%20235848.png) |
 
 | Content Assets Tab | Approval Log Sync Tab |
 | :---: | :---: |
-| ![Content Assets](screenshots/Screenshot%202026-10-08%20235821.jpg) | ![Approval Log](screenshots/Screenshot%202026-10-08%20235752.jpg) |
+| ![Content Assets](screenshots/Screenshot%202026-10-08%20235821.png) | ![Approval Log](screenshots/Screenshot%202026-10-08%20235752.png) |
 
 | Execution Audit Log | Analytics & Performance Summary |
 | :---: | :---: |
-| ![Execution Log](screenshots/Screenshot%202026-10-08%20235718.jpg) | ![Analytics](screenshots/Screenshot%202026-10-08%20235655.png) |
+| ![Execution Log](screenshots/Screenshot%202026-10-08%20235718.png) | ![Analytics](screenshots/Screenshot%202026-10-08%20235655.png) |
 
 ## Project Scope
 
