@@ -1,0 +1,3336 @@
+{
+  "name": "Enterprise AI Marketing Operations Platform",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "marketing-campaign-intake",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -160,
+        1152
+      ],
+      "id": "caa29d2c-9d28-42dd-9c6c-6991ce80c52b",
+      "name": "Webhook",
+      "webhookId": "e34c5551-0a7b-4e37-bfe0-a3ee18e5d9cc"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8e7c9cbc-d19a-4a30-bb24-16c7b0b6c9db",
+              "name": "company_name",
+              "value": "=company_name\ncompany_name\n={{ $json.body.company_name }}",
+              "type": "string"
+            },
+            {
+              "id": "d431544d-0d83-4bef-bcc9-3e672b77b2f6",
+              "name": "contact_name",
+              "value": "=contact_name\n={{ $json.body.contact_name }}",
+              "type": "string"
+            },
+            {
+              "id": "b38561b5-a801-410d-b79e-8ef85edc701a",
+              "name": "contact_email",
+              "value": "={{ $json.body.contact_email }}",
+              "type": "string"
+            },
+            {
+              "id": "7e2f3a12-eaea-4cf2-890a-2a32e5305245",
+              "name": "campaign_type",
+              "value": "={{ $json.body.campaign_type }}",
+              "type": "string"
+            },
+            {
+              "id": "0c6ef5a9-f0b4-4b4e-9af6-0f54634d7aa7",
+              "name": "business_goal",
+              "value": "={{ $json.body.business_goal }}",
+              "type": "string"
+            },
+            {
+              "id": "0705dd46-1c52-455f-acd0-f219692d7ebd",
+              "name": "target_audience",
+              "value": "={{ $json.body.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "ea7e6d57-184f-4db5-aff1-d543f170fc64",
+              "name": "primary_platforms",
+              "value": "={{ $json.body.primary_platforms.join(', ') }}",
+              "type": "string"
+            },
+            {
+              "id": "6e096cae-3357-4bec-8082-6445777dd50f",
+              "name": "brand_voice",
+              "value": "={{ $json.body.brand_voice }}",
+              "type": "string"
+            },
+            {
+              "id": "9ff7abe9-e171-4ba0-9acf-509be9402bb3",
+              "name": "campaign_deadline",
+              "value": "={{ $json.body.campaign_deadline }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        64,
+        1152
+      ],
+      "id": "e79dfd7d-631a-43fe-b049-cdaddff399d9",
+      "name": "02. DATA - Normalize Campaign Payload"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "00351414-a3c4-41fc-acde-1dcf4b11ac09",
+              "leftValue": "={{ $json.company_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "cc9bcfa1-418c-4e76-bc08-2a8dffae41bf",
+              "leftValue": "={{ $json.contact_name }}",
+              "rightValue": "is not empty",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "ad1f13b6-256d-406a-ac55-1c3c577fab7d",
+              "leftValue": "={{ $json.contact_email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "dd8b8d28-6c24-41a7-8d56-7e74c2f7db74",
+              "leftValue": "={{ $json.campaign_type }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "1cf84eab-0e41-407e-b803-0ab7b4fcdc3e",
+              "leftValue": "={{ $json.business_goal }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "c7de003f-245f-4f62-8815-85b75631a68f",
+              "leftValue": "={{ $json.target_audience }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "6aa7442f-2866-4588-a4c6-64cdd4bcf149",
+              "leftValue": "={{ $json.primary_platforms }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b32b23ed-293c-4f87-ba0b-78e68060df9d",
+              "leftValue": "={{ $json.brand_voice }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "4455789a-d817-4ab6-848b-5505826ca6de",
+              "leftValue": "={{ $json.campaign_deadline }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        288,
+        1152
+      ],
+      "id": "82aea18b-61a4-4532-82b4-fc15ecccadcd",
+      "name": "03. VAL - Validate Campaign Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a7a10a3-75fe-453c-b3e4-78c390a3da55",
+              "name": "campaign_status",
+              "value": "Pending",
+              "type": "string"
+            },
+            {
+              "id": "a4b89eaa-e6ca-4713-8281-9fce12254bdf",
+              "name": "campaign_priority",
+              "value": "Medium",
+              "type": "string"
+            },
+            {
+              "id": "7a8c967a-3aa4-4190-8007-3c6902b91c6e",
+              "name": "approval_required",
+              "value": "Yes",
+              "type": "string"
+            },
+            {
+              "id": "77de72f9-512d-4980-adf2-23a6dc2f779d",
+              "name": "assigned_agents",
+              "value": "Pending",
+              "type": "string"
+            },
+            {
+              "id": "cc8613a5-e580-47ec-ada9-0e8eab623d0e",
+              "name": "overall_progress",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "aacedad9-e864-44a7-a0a6-4c9f972485c2",
+              "name": "created_at",
+              "value": "={{ $now }}",
+              "type": "string"
+            },
+            {
+              "id": "5fbca506-fcbc-406f-b82d-02a33e2558fe",
+              "name": "updated_at",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        512,
+        1248
+      ],
+      "id": "54cdd8e9-103d-4b63-bd1e-e1cda462fdca",
+      "name": "04. CMP - Initialize Campaign"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "76104ad2-7820-4d85-bd3a-e84e7d2e5327",
+              "name": "campaign_id",
+              "value": "={{ 'CMP-' + $now.format('yyyyLLdd-HHmmss') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        1248
+      ],
+      "id": "827d4c6a-d077-4ad4-ab49-25e61a633512",
+      "name": "05. CMP - Generate Campaign ID"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Campaign_Master",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "campaign_id": "={{ $json.campaign_id }}",
+            "company_name": "={{ $json.company_name }}",
+            "contact_name": "={{ $json.contact_name }}",
+            "contact_email": "={{ $json.contact_email }}",
+            "campaign_type": "={{ $json.campaign_type }}",
+            "business_goal": "={{ $json.business_goal }}",
+            "target_audience": "={{ $json.target_audience }}",
+            "primary_platforms": "={{ $json.primary_platforms }}",
+            "brand_voice": "={{ $json.brand_voice }}",
+            "campaign_deadline": "={{ $json.campaign_deadline }}",
+            "campaign_priority": "={{ $json.campaign_priority }}",
+            "campaign_status": "={{ $json.campaign_status }}",
+            "approval_required": "={{ $json.approval_required }}",
+            "assigned_agents": "={{ $json.assigned_agents }}",
+            "overall_progress": "={{ $json.overall_progress }}",
+            "created_at": "={{ $json.created_at }}",
+            "updated_at": "={{ $json.updated_at }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_name",
+              "displayName": "company_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact_name",
+              "displayName": "contact_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact_email",
+              "displayName": "contact_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_type",
+              "displayName": "campaign_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "business_goal",
+              "displayName": "business_goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "target_audience",
+              "displayName": "target_audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "primary_platforms",
+              "displayName": "primary_platforms",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "brand_voice",
+              "displayName": "brand_voice",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_deadline",
+              "displayName": "campaign_deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_priority",
+              "displayName": "campaign_priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_status",
+              "displayName": "campaign_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approval_required",
+              "displayName": "approval_required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "assigned_agents",
+              "displayName": "assigned_agents",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "overall_progress",
+              "displayName": "overall_progress",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        960,
+        1248
+      ],
+      "id": "ae09c4a7-a3ae-41f5-a2c8-c206f8adc9b3",
+      "name": "06. DB - Create Campaign Record",
+      "retryOnFail": true,
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are the Marketing Manager Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to analyze the incoming marketing campaign request, understand the business objective, and coordinate the complete marketing workflow by assigning tasks to specialized AI agents.\n\n==================================================\nPRIMARY RESPONSIBILITIES\n==================================================\n\n1. Analyze the marketing campaign.\n2. Understand the business goal.\n3. Identify the target audience.\n4. Create a strategic execution plan.\n5. Assign work ONLY to approved AI agents.\n6. Determine campaign priority.\n7. Decide whether human approval is required.\n8. Provide clear manager notes.\n\n==================================================\nAPPROVED AI AGENTS\n==================================================\n\nYou MUST ONLY use the following agent names exactly as written.\n\n- Market Research Agent\n- Competitor Analysis Agent\n- Audience Research Agent\n- Content Writer Agent\n- LinkedIn Agent\n- Email Campaign Agent\n- Brand Review Agent\n- Human Approval Agent\n- Analytics Agent\n\nDO NOT create new agent names.\n\nNever use names like:\n\n- Copywriting Agent\n- Lead Generation Agent\n- Social Media Agent\n- Marketing Specialist\n- Creative Agent\n- Outreach Agent\n\nIf a capability is needed, map it to the closest approved agent.\n\nExamples:\n\nCopywriting → Content Writer Agent\n\nLead Generation → LinkedIn Agent + Email Campaign Agent\n\nSocial Media → Instagram Agent\n\nResearch → Market Research Agent\n\nCompetitor Research → Competitor Analysis Agent\n\n==================================================\nEXECUTION PLAN RULES\n==================================================\n\nCreate a logical step-by-step execution plan.\n\nEach step must contain:\n\n- step\n- agent\n- task\n\nThe execution plan should follow a professional marketing workflow.\n\nTypical order:\n\n1. Market Research\n2. Competitor Analysis\n3. Audience Research\n4. SEO Strategy (if required)\n5. Content Creation\n6. Brand Review\n7. Human Approval\n8. Campaign Execution\n9. Analytics & Reporting\n\nAlways include all approved agents (Market Research Agent, Competitor Analysis Agent, Audience Research Agent, Content Writer Agent, LinkedIn Agent, Email Campaign Agent, Brand Review Agent, Human Approval Agent, Analytics Agent) in recommended_agents and execution_plan for every campaign, regardless of type. Do not skip any agent.\n==================================================\nRECOMMENDED AGENTS RULES\n==================================================\n\nrecommended_agents MUST contain EVERY UNIQUE agent used inside execution_plan.\n\nRules:\n\n- Every agent in execution_plan MUST exist in recommended_agents.\n- Never omit an agent.\n- Never create duplicate agent names.\n- Only approved agent names are allowed.\n\nExample:\n\nIf execution_plan contains\n\nMarket Research Agent\n\nAudience Research Agent\n\nLinkedIn Agent\n\nAnalytics Agent\n\nthen recommended_agents MUST be\n\n[\n\"Market Research Agent\",\n\"Audience Research Agent\",\n\"LinkedIn Agent\",\n\"Analytics Agent\"\n]\n\n==================================================\nCAMPAIGN PRIORITY\n==================================================\n\nReturn one value only:\n\nLow\n\nMedium\n\nHigh\n\n==================================================\nHUMAN APPROVAL\n==================================================\n\nReturn\n\ntrue\n\nonly when:\n\nBudget approval\n\nLegal approval\n\nBrand approval\n\nFinal campaign approval\n\nExecutive approval\n\nis required.\n\nOtherwise return\n\nfalse\n\n==================================================\nMANAGER NOTES\n==================================================\n\nProvide concise implementation guidance for the marketing team.\n\nMention:\n\nRisks\n\nTimeline\n\nDependencies\n\nQuality considerations\n\n==================================================\nOUTPUT REQUIREMENTS\n==================================================\n\nReturn ONLY valid JSON.\n\nDo not include markdown.\n\nDo not explain anything.\n\nDo not add extra text.\n\nThe JSON must exactly follow the Structured Output Parser schema.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1184,
+        1248
+      ],
+      "id": "bf5191e3-feef-42a6-9f7a-f1bd5fc069b1",
+      "name": "07. AI - Marketing Manager Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        1472
+      ],
+      "id": "bb3f6ee6-87fc-4489-845d-e7d10f919649",
+      "name": "07.2 LLM - Gemini Marketing Intelligence Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"campaign_summary\": \"string\",\n  \"campaign_objective\": \"string\",\n  \"target_audience\": \"string\",\n  \"recommended_agents\": [\n    \"string\"\n  ],\n  \"execution_plan\": [\n    {\n      \"step\": \"string\",\n      \"agent\": \"string\",\n      \"task\": \"string\"\n    }\n  ],\n  \"campaign_priority\": \"string\",\n  \"human_approval_required\": true,\n  \"manager_notes\": \"string\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1328,
+        1472
+      ],
+      "id": "fa26c8ad-3486-4f05-81bb-f4ff59f6bd7c",
+      "name": "07.1 PARSER - Marketing Manager Structured Output"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.recommended_agents",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        1248
+      ],
+      "id": "4f69f390-af99-498f-b4e8-ab39822b3b0c",
+      "name": "08. DATA - Expand Agent Queue"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b4e7f669-87bc-4ada-9896-95c3eeb66d37",
+              "name": "current_agent",
+              "value": "={{ $json[\"output.recommended_agents\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1248
+      ],
+      "id": "d0d7bfd0-eaec-46bd-81a0-f3ccf57a546b",
+      "name": "09. DATA - Normalize Agent Assignment"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Market Research Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d89aa75f-71ab-4e43-915b-0338fa9dd802"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Market Research Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d7a876b8-e65e-45d9-8b24-5bbd86359e0b",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Competitor Analysis Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Competitor Analysis Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "cb588ffc-99f4-4aaa-a5b4-6aec950be91b",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Audience Research Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audience Research Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fd9385a8-d3cb-4a70-a88c-1d1fc4b86f62",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Content Writer Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Content Writer Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "237537f8-419e-4ccb-b83f-24e027fe0744",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "=Human Approval Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Human Approval Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "608fba44-6b48-4450-9a17-41ea3c21faa5",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "LinkedIn Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "LinkedIn Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bf041860-a2f2-4c54-849c-d3e2e0cb1b67",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Email Campaign Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Email Campaign Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a90455e6-cf7c-480e-9923-e70b23a024a8",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Brand Review Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Brand Review Agent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "accf0d77-8554-4c07-b3bf-5fc40fdc0539",
+                    "leftValue": "={{ $json.current_agent }}",
+                    "rightValue": "Analytics Agent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Analytics Agent"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1984,
+        1136
+      ],
+      "id": "0ace1c1d-e8f5-4ebd-adc1-3394bfac2fd9",
+      "name": "10. ROUTER - Marketing Agent Dispatcher"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "198df547-d889-45a9-bb40-c0afa0e79bd7",
+              "name": "assigned_agent",
+              "value": "={{ $json.current_agent }}",
+              "type": "string"
+            },
+            {
+              "id": "801bb213-2388-48a2-b203-f96608fde859",
+              "name": "research_focus",
+              "value": "={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "172c7db1-0056-407f-9956-5973f865a61b",
+              "name": "target_market",
+              "value": "={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "a4e6568d-86c2-40b8-8957-6e582e812f35",
+              "name": "campaign_summary",
+              "value": "={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "c4536f77-605d-4bd3-95a3-0c51b3d28de4",
+              "name": "manager_notes",
+              "value": "={{ $json.output.manager_notes }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        -256
+      ],
+      "id": "5f5581a0-6018-4c6d-9d2c-0502161d4b59",
+      "name": "11. DATA - Prepare Market Research Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Market Research Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to perform comprehensive market research for the assigned marketing campaign.\n\n==================================================\nYOUR RESPONSIBILITIES\n==================================================\n\nAnalyze the campaign objective.\n\nStudy the target audience.\n\nIdentify market opportunities.\n\nIdentify customer pain points.\n\nIdentify current industry trends.\n\nIdentify buying behavior.\n\nIdentify market risks.\n\nProvide actionable recommendations.\n\nYour research should help the Competitor Analysis Agent, Content Writer Agent, and Marketing Manager make better decisions.\n\n==================================================\nINPUT INFORMATION\n==================================================\n\nCampaign Objective:\n{{ $json.research_focus }}\n\nTarget Audience:\n{{ $json.target_market }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\n==================================================\nANALYSIS REQUIREMENTS\n==================================================\n\nGenerate:\n\n• Executive Summary\n\n• Market Overview\n\n• Target Audience Insights\n\n• Customer Pain Points\n\n• Buying Motivations\n\n• Market Opportunities\n\n• Market Risks\n\n• Recommended Strategy\n\n• Recommended Messaging Angle\n\n• Key Success Factors\n\n==================================================\nOUTPUT RULES\n==================================================\n\nReturn professional business language.\n\nKeep recommendations practical.\n\nFocus on B2B marketing.\n\nDo not invent company information.\n\nDo not use markdown.\n\nReturn ONLY valid JSON.\n\nThe JSON must exactly match the Structured Output Parser schema.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        -368
+      ],
+      "id": "a1c0263b-b1f6-4dd1-9372-d034801fc344",
+      "name": "12. AI - Market Research Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        -144
+      ],
+      "id": "4b4c037c-3eb1-4120-9dfa-eca87ea4085e",
+      "name": "12.1 LLM - Gemini Market Research",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"executive_summary\": \"Summary\",\n  \"market_overview\": \"Overview\",\n  \"target_audience_insights\": \"Audience insights\",\n  \"customer_pain_points\": [\n    \"Pain point 1\",\n    \"Pain point 2\",\n    \"Pain point 3\"\n  ],\n  \"buying_motivations\": [\n    \"Motivation 1\",\n    \"Motivation 2\",\n    \"Motivation 3\"\n  ],\n  \"market_opportunities\": [\n    \"Opportunity 1\",\n    \"Opportunity 2\",\n    \"Opportunity 3\"\n  ],\n  \"market_risks\": [\n    \"Risk 1\",\n    \"Risk 2\",\n    \"Risk 3\"\n  ],\n  \"recommended_strategy\": \"Recommended strategy\",\n  \"messaging_angle\": \"Messaging angle\",\n  \"key_success_factors\": [\n    \"Factor 1\",\n    \"Factor 2\",\n    \"Factor 3\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        -144
+      ],
+      "id": "7427d251-81e4-47ac-b586-d2acea9439d2",
+      "name": "12.2 PARSER - Market Research Structured Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d573404a-ba98-425b-963e-c455181b7b09",
+              "name": "assigned_agent",
+              "value": "Competitor Analysis Agent",
+              "type": "string"
+            },
+            {
+              "id": "62b8b522-7a8f-4ede-804f-ebe7d5a8a503",
+              "name": "research_focus",
+              "value": "={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "f30d19b0-4dc6-42c5-b757-3a7b723c5dba",
+              "name": "target_market",
+              "value": "={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "aec7e5a6-839c-4b9a-bc15-6bbf3e1c7e15",
+              "name": "campaign_summary",
+              "value": "={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "3cb666e0-cf65-4900-9c65-0df91b6960fd",
+              "name": "manager_notes",
+              "value": "={{ $json.output.manager_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "b3fb101b-2039-4a85-9dfa-27e280a3190f",
+              "name": "campaign_priority",
+              "value": "={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "ca3553db-4f09-4e3a-a4da-439d9b320971",
+              "name": "human_approval_required",
+              "value": "={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        144
+      ],
+      "id": "51506575-9d68-4b5d-a9e2-b6a71cef9008",
+      "name": "13. DATA - Prepare Competitor Analysis Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Competitor Analysis Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to analyze the competitive landscape relevant to the assigned marketing campaign and provide actionable insights for the marketing team.\n\n==================================================\nYOUR RESPONSIBILITIES\n==================================================\n\n1. Analyze the campaign objective and target market.\n2. Identify relevant competitor categories.\n3. Analyze common competitor positioning and messaging patterns.\n4. Identify competitor strengths and weaknesses.\n5. Identify market gaps.\n6. Identify differentiation opportunities.\n7. Identify competitive risks.\n8. Recommend a clear market positioning.\n9. Recommend messaging angles for LinkedIn and Email.\n10. Provide practical recommendations for lead generation.\n\nYour analysis will be used by the Audience Research Agent, Content Writer Agent, Brand Review Agent, Marketing Manager, LinkedIn Agent, and Email Campaign Agent.\n\n==================================================\nIMPORTANT RESEARCH LIMITATIONS\n==================================================\n\nDo not claim that you accessed live competitor websites, LinkedIn profiles, private databases, paid research reports, or real-time competitor data unless such information is explicitly provided in the input.\n\nDo not invent specific competitor names, market share percentages, statistics, customer reviews, pricing, or other unsupported facts.\n\nUse the campaign information provided below as the primary context.\n\nKeep the analysis practical and relevant to B2B marketing.\n\n==================================================\nINPUT INFORMATION\n==================================================\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.research_focus }}\n\nTarget Market:\n{{ $json.target_market }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\n==================================================\nANALYSIS REQUIREMENTS\n==================================================\n\nAnalyze the campaign and generate:\n\n1. Executive Summary\n\nProvide a concise summary of the competitive situation and the most important strategic implications.\n\n2. Competitive Landscape\n\nDescribe the main types of competitors or alternative solutions relevant to this campaign.\n\n3. Competitor Positioning Patterns\n\nIdentify common themes competitors are likely to use when positioning their solutions for this target audience.\n\n4. Competitor Strengths\n\nIdentify the major strengths that established competitors or alternative solutions may have.\n\n5. Competitor Weaknesses\n\nIdentify potential weaknesses or limitations that can create opportunities for differentiation.\n\n6. Market Gaps\n\nIdentify underserved needs, positioning gaps, content gaps, or customer experience gaps.\n\n7. Differentiation Opportunities\n\nExplain how the campaign can differentiate itself from competing solutions.\n\n8. Competitive Risks\n\nIdentify risks that could negatively affect campaign performance or lead generation.\n\n9. Recommended Positioning\n\nProvide a clear positioning strategy for this campaign.\n\n10. Recommended Messaging Angles\n\nProvide several practical messaging angles suitable for LinkedIn and Email campaigns.\n\n11. LinkedIn Competitive Strategy\n\nRecommend how the campaign should compete for attention on LinkedIn.\n\n12. Email Competitive Strategy\n\nRecommend how the campaign should differentiate its email outreach and nurturing sequence.\n\n13. Key Recommendations\n\nProvide the most important actionable recommendations for the marketing team.\n\n==================================================\nOUTPUT FORMAT\n==================================================\n\nReturn ONLY one valid JSON object.\n\nDo NOT write an introduction.\n\nDo NOT write an explanation before the JSON.\n\nDo NOT write anything after the JSON.\n\nDo NOT use Markdown.\n\nDo NOT use code fences.\n\nDo NOT call any tool or function.\n\nDo NOT use the format_final_json_response tool.\n\nReturn the JSON object directly.\n\nThe JSON MUST contain exactly these fields:\n\n{\n  \"executive_summary\": \"string\",\n  \"competitive_landscape\": \"string\",\n  \"competitor_positioning_patterns\": \"string\",\n  \"competitor_strengths\": [\"string\"],\n  \"competitor_weaknesses\": [\"string\"],\n  \"market_gaps\": [\"string\"],\n  \"differentiation_opportunities\": [\"string\"],\n  \"competitive_risks\": [\"string\"],\n  \"recommended_positioning\": \"string\",\n  \"recommended_messaging_angles\": [\"string\"],\n  \"linkedin_competitive_strategy\": \"string\",\n  \"email_competitive_strategy\": \"string\",\n  \"key_recommendations\": [\"string\"]\n}\n\n==================================================\nSTRICT JSON RULES\n==================================================\n\nUse EXACTLY the field names specified above.\n\nDo not use \"state\".\n\nDo not use \"cities\".\n\nDo not use \"output\".\n\nDo not add extra fields.\n\nDo not rename fields.\n\nFields defined as \"string\" must contain a single string value.\n\nFields defined as arrays must contain only strings.\n\nEvery required field must be present.\n\nThe final response must be valid JSON.\n\n==================================================\nFINAL CHECK BEFORE RESPONSE\n==================================================\n\nBefore returning the response, verify that:\n\n- All 13 required fields are present.\n- Every field name exactly matches the schema.\n- String fields contain strings.\n- Array fields contain arrays of strings.\n- There are no additional fields.\n- No Markdown is included.\n- No tool/function is called.\n- The response contains ONLY the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        32
+      ],
+      "id": "99a94eb5-2649-40f3-90b2-ea8aa87bd1f9",
+      "name": "14. AI - Competitor Analysis Agent",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"executive_summary\": \"A concise summary of the competitive landscape and its strategic implications for the campaign.\",\n  \"competitive_landscape\": \"A description of the main competitor categories and alternative solutions relevant to the target market.\",\n  \"competitor_positioning_patterns\": \"A summary of the common positioning and messaging patterns used by competitors.\",\n  \"competitor_strengths\": [\n    \"Strong brand recognition\",\n    \"Established customer relationships\",\n    \"Broad solution capabilities\"\n  ],\n  \"competitor_weaknesses\": [\n    \"Limited personalization\",\n    \"Complex implementation\",\n    \"Generic marketing messaging\"\n  ],\n  \"market_gaps\": [\n    \"Lack of specialized mid-market solutions\",\n    \"Limited personalized guidance\",\n    \"Insufficient practical educational content\"\n  ],\n  \"differentiation_opportunities\": [\n    \"Provide highly personalized strategies\",\n    \"Focus on specific mid-market HR challenges\",\n    \"Use value-first educational content\"\n  ],\n  \"competitive_risks\": [\n    \"Strong competition for HR decision-maker attention\",\n    \"Higher advertising budgets from established competitors\",\n    \"Prospect skepticism toward generic AI claims\"\n  ],\n  \"recommended_positioning\": \"Position the company as a strategic and practical partner for mid-market HR teams.\",\n  \"recommended_messaging_angles\": [\n    \"Scale HR operations without unnecessary complexity\",\n    \"Improve HR efficiency while maintaining a human approach\",\n    \"Build a stronger HR infrastructure for sustainable growth\"\n  ],\n  \"linkedin_competitive_strategy\": \"Use educational thought-leadership content and personalized engagement to build authority with HR decision-makers.\",\n  \"email_competitive_strategy\": \"Use short personalized email sequences that provide practical value before introducing a sales conversation.\",\n  \"key_recommendations\": [\n    \"Prioritize high-value HR pain points\",\n    \"Synchronize LinkedIn and Email messaging\",\n    \"Maintain human review before campaign execution\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        256
+      ],
+      "id": "8b2f63e8-e616-4ff1-8eb0-b5691d938bf0",
+      "name": "14.2 PARSER - Competitor Analysis Structured Output",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        256
+      ],
+      "id": "eb2c05d5-c8d3-4dc5-8bc6-1cb0a91341a5",
+      "name": "14.1 LLM - Gemini Competitor Analysis",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e702d2a6-c13c-4519-a78a-50f4cada8c51",
+              "name": "assigned_agent",
+              "value": "Audience Research Agent",
+              "type": "string"
+            },
+            {
+              "id": "e1301aed-c207-4d7a-9ea1-e1a7228814f5",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "ecdc1016-76ef-4e30-b016-b0d6504e3710",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "9f9088a0-9264-4598-9bd9-770dcbf4fe88",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "4aa18c02-277c-4198-9a1f-a471eb2f409c",
+              "name": "manager_notes",
+              "value": "={{ $json.output.manager_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "ee938572-d939-41c9-9266-30d382f31c23",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "40dd2398-b82e-4a1b-8474-304b8a4853cd",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        1344
+      ],
+      "id": "bc2b3b07-ac48-4764-a278-b7718a85cdff",
+      "name": "15. DATA - Prepare Audience Research Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Audience Research Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to deeply analyze the target audience for the assigned B2B marketing campaign and provide actionable audience insights that can be used by the Content Writer Agent, LinkedIn Agent, Email Campaign Agent, Brand Review Agent, and Marketing Manager.\n\n==================================================\nYOUR RESPONSIBILITIES\n==================================================\n\nAnalyze the target audience and identify:\n\n1. Audience characteristics\n2. Professional roles and responsibilities\n3. Core pain points\n4. Professional goals\n5. Buying motivations\n6. Buying objections\n7. Decision-making factors\n8. Content preferences\n9. Preferred communication channels\n10. Behavioral insights\n11. Audience segments\n12. Messaging opportunities\n13. Practical recommendations\n\nFocus specifically on the audience provided in the campaign context.\n\n==================================================\nIMPORTANT RESEARCH LIMITATIONS\n==================================================\n\nDo not invent personal information about individual people.\n\nDo not claim access to private customer data, internal company databases, private LinkedIn information, surveys, or proprietary research unless such information is explicitly provided in the input.\n\nDo not invent statistics, percentages, survey results, or unsupported market facts.\n\nUse reasonable B2B marketing analysis based on the campaign information provided.\n\nClearly distinguish strategic assumptions from information explicitly provided in the campaign.\n\nKeep the analysis practical and actionable.\n\n==================================================\nINPUT INFORMATION\n==================================================\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\n==================================================\nAUDIENCE ANALYSIS REQUIREMENTS\n==================================================\n\nAnalyze the following areas:\n\n1. Audience Profile\n\nDescribe the professional characteristics of the target audience, including their likely roles, responsibilities, business environment, and priorities.\n\n2. Audience Segments\n\nIdentify meaningful audience segments within the target audience based on role, company size, responsibility, business needs, or buying intent.\n\n3. Pain Points\n\nIdentify the most important operational, strategic, financial, or organizational problems this audience is likely to face.\n\n4. Professional Goals\n\nIdentify what the target audience is trying to achieve professionally and organizationally.\n\n5. Buying Motivations\n\nIdentify the factors that can motivate this audience to evaluate or purchase a solution.\n\n6. Buying Objections\n\nIdentify the major concerns that could prevent the audience from responding to the campaign.\n\n7. Decision-Making Factors\n\nIdentify what factors the audience is likely to evaluate before choosing a solution.\n\n8. Content Preferences\n\nIdentify the types of content most likely to provide value to this audience.\n\n9. Communication Preferences\n\nRecommend appropriate communication channels and approaches for reaching the audience.\n\n10. Behavioral Insights\n\nDescribe relevant professional behaviors, information-seeking patterns, and engagement tendencies.\n\n11. Messaging Opportunities\n\nIdentify specific messaging opportunities that can make the campaign more relevant and persuasive.\n\n12. Audience Engagement Strategy\n\nRecommend how the campaign should initially engage the audience and move them toward higher intent.\n\n13. Key Recommendations\n\nProvide practical recommendations for the Content Writer Agent, LinkedIn Agent, and Email Campaign Agent.\n\n==================================================\nOUTPUT REQUIREMENTS\n==================================================\n\nReturn the audience research according to the exact output format defined by the connected Structured Output Parser.\n\nDo not add extra fields.\n\nDo not rename fields.\n\nDo not return Markdown.\n\nDo not return explanations outside the structured output.\n\nDo not invent unsupported facts.\n\nDo not call any external tool or function.\n\nReturn only the structured audience research output.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        1232
+      ],
+      "id": "8acb7d24-4fed-4314-8ca7-663c0294b20b",
+      "name": "16. AI - Audience Research Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        1456
+      ],
+      "id": "a86ff8cf-f16d-4d16-a5e9-c7261150d802",
+      "name": "16.1 LLM - Gemini Audience Research",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"audience_profile\": \"A professional profile of the target audience, including roles, responsibilities, company environment, and priorities.\",\n  \"audience_segments\": [\n    \"Audience segment 1\",\n    \"Audience segment 2\",\n    \"Audience segment 3\"\n  ],\n  \"pain_points\": [\n    \"Primary audience pain point\",\n    \"Secondary audience pain point\",\n    \"Operational or strategic challenge\"\n  ],\n  \"professional_goals\": [\n    \"Primary professional goal\",\n    \"Secondary professional goal\",\n    \"Organizational goal\"\n  ],\n  \"buying_motivations\": [\n    \"Reason that may motivate the audience to evaluate a solution\",\n    \"Expected business benefit\",\n    \"Expected operational benefit\"\n  ],\n  \"buying_objections\": [\n    \"Potential objection or concern\",\n    \"Budget or implementation concern\",\n    \"Trust or risk concern\"\n  ],\n  \"decision_making_factors\": [\n    \"Factor considered before purchasing\",\n    \"Expected ROI or business impact\",\n    \"Ease of implementation or integration\"\n  ],\n  \"content_preferences\": [\n    \"Preferred educational content type\",\n    \"Preferred professional content format\",\n    \"Preferred value-driven resource\"\n  ],\n  \"communication_preferences\": [\n    \"Preferred communication channel\",\n    \"Preferred outreach approach\",\n    \"Preferred communication style\"\n  ],\n  \"behavioral_insights\": [\n    \"Relevant professional behavior\",\n    \"Information-seeking behavior\",\n    \"Engagement tendency\"\n  ],\n  \"messaging_opportunities\": [\n    \"Messaging opportunity based on audience pain points\",\n    \"Messaging opportunity based on professional goals\",\n    \"Messaging opportunity based on buying motivations\"\n  ],\n  \"audience_engagement_strategy\": \"A practical strategy for initially engaging the audience and moving them toward higher purchase intent.\",\n  \"key_recommendations\": [\n    \"Recommendation for Content Writer Agent\",\n    \"Recommendation for LinkedIn Agent\",\n    \"Recommendation for Email Campaign Agent\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        1456
+      ],
+      "id": "10e3d11b-8873-4414-9e67-ae78a0b52280",
+      "name": "16.2 PARSER - Audience Research Structured Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5debe839-1bc2-4bb6-87e0-df1eebe0358f",
+              "name": "assigned_agent",
+              "value": "Content Writer Agent",
+              "type": "string"
+            },
+            {
+              "id": "edbe9850-1be2-44dc-8bb2-85ef3d097a70",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "4f743f22-2bd9-4885-9b46-1246f2400481",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "a1be4c03-321a-4b10-a6e3-2f021b5dcce4",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "a127e871-3f6b-465e-952a-92970bbf57e6",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}\n",
+              "type": "string"
+            },
+            {
+              "id": "4c7d60d6-cce0-4225-8c22-6c35393e42b3",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "0816d995-ba40-49d5-8845-b5215ef1cf5e",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        2944
+      ],
+      "id": "5451ad65-a104-4ab1-a550-3be7f221855f",
+      "name": "17. DATA - Prepare Content Writer Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Content Writer Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to create professional, conversion-focused B2B marketing content for the assigned campaign.\n\n==================================================\nYOUR RESPONSIBILITIES\n==================================================\n\nCreate marketing content based on the campaign objective, target audience, campaign summary, and manager instructions.\n\nYou must create:\n\n1. LinkedIn organic posts\n2. LinkedIn lead-generation ad copy\n3. A multi-step email nurture sequence\n4. Strong but professional calls to action\n5. Messaging that is relevant to the target audience\n6. Content that maintains the required professional brand voice\n\n==================================================\nINPUT INFORMATION\n==================================================\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\n==================================================\nCONTENT REQUIREMENTS\n==================================================\n\nLINKEDIN ORGANIC POSTS\n\nCreate 3 LinkedIn posts.\n\nEach post must have:\n\n- A strong professional hook\n- A clear business problem or insight\n- Useful value for the target audience\n- A natural call to action\n- Professional B2B language\n- No exaggerated claims\n- No unsupported statistics\n\nThe three posts should use different angles and should not repeat the same message.\n\n==================================================\nLINKEDIN LEAD GENERATION AD\n==================================================\n\nCreate one LinkedIn lead-generation advertisement.\n\nInclude:\n\n- Ad headline\n- Primary text\n- Call to action\n- Lead magnet or value proposition\n\nThe ad should focus on generating qualified leads rather than maximizing clicks.\n\n==================================================\nEMAIL NURTURE SEQUENCE\n==================================================\n\nCreate a 3-email nurture sequence.\n\nEmail 1:\nIntroduce the problem and provide immediate value.\n\nEmail 2:\nExpand on the problem and explain the potential solution or approach.\n\nEmail 3:\nCreate higher purchase intent with a clear but low-pressure CTA.\n\nFor every email include:\n\n- Subject line\n- Preview text\n- Email body\n- CTA\n\nKeep the emails concise, professional, and relevant to HR decision-makers.\n\n==================================================\nCONTENT STRATEGY\n==================================================\n\nThe content should:\n\n- Focus on qualified B2B leads.\n- Address real business problems relevant to HR leadership.\n- Emphasize practical business value.\n- Avoid generic AI hype.\n- Avoid aggressive sales language.\n- Build trust before asking for a sales conversation.\n- Maintain consistency between LinkedIn and Email messaging.\n- Use the campaign's professional brand voice.\n- Prioritize quality leads over quantity.\n- Respect the campaign deadline and manager notes.\n\nDo not invent company information.\n\nDo not invent statistics, customer results, case studies, testimonials, or claims that are not provided in the input.\n\n==================================================\nOUTPUT RULES\n==================================================\n\nReturn professional business language.\n\nDo not use Markdown.\n\nDo not add explanations outside the requested output.\n\nDo not add extra fields.\n\nDo not rename fields.\n\nReturn ONLY the structured content required by the connected Structured Output Parser.\n\nThe output must exactly match the parser schema.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        2944
+      ],
+      "id": "5050e27a-29ae-44e7-9213-3b4c5920dcd4",
+      "name": "18. AI - Content Writer Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        3168
+      ],
+      "id": "7c173d7d-4654-427a-ad98-a6b04fc75191",
+      "name": "18.1 LLM - Gemini Content Writer",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"linkedin_posts\": [\n    {\n      \"post_number\": \"1\",\n      \"hook\": \"Professional LinkedIn hook\",\n      \"body\": \"Professional LinkedIn post body providing useful insight to the target audience.\",\n      \"call_to_action\": \"Professional call to action\"\n    },\n    {\n      \"post_number\": \"2\",\n      \"hook\": \"Second LinkedIn hook\",\n      \"body\": \"A different professional LinkedIn post focused on another audience pain point.\",\n      \"call_to_action\": \"Professional call to action\"\n    },\n    {\n      \"post_number\": \"3\",\n      \"hook\": \"Third LinkedIn hook\",\n      \"body\": \"A third professional LinkedIn post using a different messaging angle.\",\n      \"call_to_action\": \"Professional call to action\"\n    }\n  ],\n  \"linkedin_lead_generation_ad\": {\n    \"headline\": \"Professional LinkedIn lead generation headline\",\n    \"primary_text\": \"Professional lead generation advertisement copy.\",\n    \"call_to_action\": \"Download the resource\"\n  },\n  \"email_nurture_sequence\": [\n    {\n      \"email_number\": \"1\",\n      \"subject_line\": \"Professional email subject line\",\n      \"preview_text\": \"Short email preview text\",\n      \"email_body\": \"Email body focused on introducing the problem and providing immediate value.\",\n      \"call_to_action\": \"Low-friction call to action\"\n    },\n    {\n      \"email_number\": \"2\",\n      \"subject_line\": \"Second email subject line\",\n      \"preview_text\": \"Short email preview text\",\n      \"email_body\": \"Email body expanding on the problem and presenting a practical solution approach.\",\n      \"call_to_action\": \"Low-friction call to action\"\n    },\n    {\n      \"email_number\": \"3\",\n      \"subject_line\": \"Third email subject line\",\n      \"preview_text\": \"Short email preview text\",\n      \"email_body\": \"Email body designed to move a qualified prospect toward higher purchase intent.\",\n      \"call_to_action\": \"Professional conversion-focused call to action\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        3168
+      ],
+      "id": "a5f938fe-ec71-42a8-9595-3bc7d1c56ce4",
+      "name": "18.2 PARSER - Content Writer Structured Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "741b79eb-69a4-4cf7-a463-6259e17143a6",
+              "name": "assigned_agent",
+              "value": "Human Approval Agent",
+              "type": "string"
+            },
+            {
+              "id": "03a06f35-e77e-4d3f-918f-b491a15d7374",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "6921c7da-d271-4f9b-a329-d39717357e64",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "d5b6766d-2e2c-407d-9c94-91f8ab80c563",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "0d8d1110-9e67-4b07-8979-951ecf970af4",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "965c1919-56db-44bc-a9d3-df0579650f41",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "ef09273e-20b1-4809-ad78-8476f684faa1",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            },
+            {
+              "id": "87d6c845-e1a9-4cf2-bbd0-689d8c24f4af",
+              "name": "execution_plan",
+              "value": "=={{ JSON.stringify($json.output.execution_plan) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        944
+      ],
+      "id": "053e06e2-316d-481e-b556-f59c2525884e",
+      "name": "19. DATA - Prepare Human Approval Contex"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        1056
+      ],
+      "id": "f530217a-e52f-45b9-94c9-3253ebb1ac4c",
+      "name": "20.1 MODEL - Gemini Human Approval",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"approval_status\": \"ready_for_approval\",\n  \"approval_required\": true,\n  \"campaign_readiness_score\": 88,\n  \"executive_summary\": \"The campaign is well aligned with HR leadership in mid-sized companies and has a clear multi-channel lead generation strategy. The execution plan follows a logical sequence from research through content development, human approval, deployment, and analytics.\",\n  \"approval_recommendation\": \"The campaign is sufficiently prepared to be submitted for final human or executive approval. No major strategic issue prevents executive review.\",\n  \"key_risks\": [\n    \"The August 31, 2026 deadline requires timely completion of research and content phases.\",\n    \"LinkedIn and Email messaging must remain synchronized throughout execution.\",\n    \"Lead quality should remain the primary KPI rather than lead volume.\"\n  ],\n  \"missing_information\": [\n    \"Final campaign budget and platform allocation have not been specified.\",\n    \"Final lead qualification criteria and conversion targets should be confirmed before launch.\"\n  ],\n  \"review_points\": [\n    \"Confirm final campaign assets and brand compliance before approval.\",\n    \"Verify LinkedIn and Email messaging synchronization.\",\n    \"Confirm the campaign timeline supports the August 31, 2026 deadline.\",\n    \"Validate lead quality KPIs and qualification criteria.\"\n  ],\n  \"next_action\": \"Submit the completed campaign strategy and content assets for final human or executive approval. Do not launch LinkedIn or Email execution until approval is granted.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        1056
+      ],
+      "id": "5aeb364e-f9c1-42e8-9d07-b6fc221d6332",
+      "name": "20.2 PARSER - Human Approval Output"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Human Approval Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to perform the final readiness assessment of the assigned marketing campaign before it is submitted for human or executive approval.\n\nYou are NOT responsible for executing the campaign.\n\nDo not:\n- send emails\n- publish LinkedIn content\n- contact leads\n- launch the campaign\n- make external changes\n- assume executive approval has already been granted\n\nReview the campaign context provided below.\n\nEvaluate:\n\n1. Alignment between campaign objective and target audience.\n2. Completeness and clarity of the campaign strategy.\n3. Consistency with manager notes.\n4. Whether the campaign deadline is realistically supported by the execution plan.\n5. Whether the execution plan is logically structured.\n6. Whether human approval is required.\n7. Important risks that an executive should review.\n8. Missing information that could affect approval.\n9. Key points that should be reviewed before approval.\n\nDo not automatically approve the campaign simply because campaign data is present.\n\nIf the campaign is sufficiently complete and consistent for executive review, use:\n\"ready_for_approval\"\n\nIf important information or significant issues require attention, use:\n\"needs_review\"\n\nThe campaign readiness score must be an integer from 0 to 100.\n\nUse the campaign information provided below as the primary context.\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\nExecution Plan:\n{{ $json.execution_plan }}\n\nPerform the final campaign readiness assessment.\n\nReturn the assessment using exactly these fields:\n\napproval_status\napproval_required\ncampaign_readiness_score\nexecutive_summary\napproval_recommendation\nkey_risks\nmissing_information\nreview_points\nnext_action\n\nRules:\n\n- approval_status must be either \"ready_for_approval\" or \"needs_review\".\n- approval_required must be a boolean.\n- campaign_readiness_score must be an integer from 0 to 100.\n- executive_summary must be a string.\n- approval_recommendation must be a string.\n- key_risks must be an array of strings.\n- missing_information must be an array of strings.\n- review_points must be an array of strings.\n- next_action must be a string.\n- Every field must be present.\n- Do not create an \"output\" field.\n- Do not create \"type\" fields.\n- Do not create \"properties\".\n- Do not create \"required\".\n- Do not return a JSON schema.\n- Do not add extra fields.\n- Do not rename fields.\n- Do not return Markdown.\n- Do not add explanations.\n- Do not execute the campaign.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        832
+      ],
+      "id": "19365346-d7e4-40aa-a0d1-a966ffa8d17f",
+      "name": "20. AI AGENT - Human Approval Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "edcf248c-c22b-45c1-b062-437f4f6127bd",
+              "name": "assigned_agent",
+              "value": "=LinkedIn Agent",
+              "type": "string"
+            },
+            {
+              "id": "f2fd993c-8d95-4ff5-a6a2-55b6c80eb122",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "e0126b40-f992-4494-80a2-de03504d8f4e",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "dea48cc4-a9ae-4c93-817f-f75ef4c53aa1",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "d87156f8-7126-483d-a637-56bff4716326",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "b3f65cfe-bfd6-47d3-bcd2-63a1ba8d0888",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "899e1fa7-e053-447c-8471-ecdb00e87d38",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        544
+      ],
+      "id": "5d089431-0d83-46ee-bcb0-3fbd3a6cdabe",
+      "name": "21. DATA - Prepare LinkedIn Agent Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the LinkedIn Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to develop the LinkedIn campaign strategy and execution plan for the assigned B2B marketing campaign.\n\nYou are NOT responsible for actually executing LinkedIn actions.\n\nDo not:\n- publish LinkedIn posts\n- launch LinkedIn advertisements\n- send connection requests\n- send LinkedIn messages\n- contact prospects\n- make external changes\n- claim that any LinkedIn campaign has been launched\n\nYour output will be used by the Brand Review Agent, Email Campaign Agent, Marketing Manager, and downstream campaign execution workflow.\n\nUse the campaign information provided below as the primary context.\n\nEvaluate:\n\n1. Campaign objective\n2. Target audience\n3. Campaign summary\n4. Manager notes\n5. Campaign priority\n6. Human approval requirement\n\nThe LinkedIn strategy must focus on qualified B2B lead generation for HR Managers and HR Directors working in companies with 100-1000 employees.\n\nThe strategy should:\n- maintain a professional and consultative tone\n- focus on relevant HR leadership challenges\n- prioritize qualified leads over broad reach\n- use educational and value-driven content\n- support the overall campaign objective\n- remain consistent with the campaign deadline\n- avoid exaggerated or unsupported claims\n- keep LinkedIn messaging suitable for professional decision-makers\n\nCAMPAIGN CONTEXT\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\nNow develop the LinkedIn campaign strategy.\n\nGenerate:\n\n1. LinkedIn Campaign Strategy\nExplain the overall LinkedIn strategy for the campaign.\n\n2. Targeting Strategy\nDefine how the campaign should target the intended HR audience.\n\n3. Content Strategy\nRecommend the main types of LinkedIn content that should be used.\n\n4. Engagement Strategy\nExplain how the campaign should build engagement with HR decision-makers.\n\n5. Lead Generation Strategy\nExplain how LinkedIn engagement should be converted into qualified B2B leads.\n\n6. Outreach Strategy\nRecommend an appropriate approach for professional LinkedIn outreach.\n\n7. Ad Strategy\nRecommend how LinkedIn lead-generation advertising should be positioned.\n\n8. Call To Action\nProvide the primary CTA for LinkedIn prospects.\n\n9. Execution Checklist\nList the important steps that must be completed before LinkedIn execution.\n\n10. Key Recommendations\nProvide the most important actionable recommendations.\n\nReturn ONLY one valid JSON object.\n\nThe JSON MUST contain exactly these fields:\n\n{\n\"linkedin_campaign_strategy\": \"string\",\n\"targeting_strategy\": \"string\",\n\"content_strategy\": \"string\",\n\"engagement_strategy\": \"string\",\n\"lead_generation_strategy\": \"string\",\n\"outreach_strategy\": \"string\",\n\"ad_strategy\": \"string\",\n\"call_to_action\": \"string\",\n\"execution_checklist\": [\"string\"],\n\"key_recommendations\": [\"string\"]\n}\n\nRules:\n\n- String fields must contain a single string value.\n- Array fields must contain only strings.\n- Every required field must be present.\n- Do not create an \"output\" field.\n- Do not create \"type\" fields.\n- Do not create \"properties\".\n- Do not create \"required\".\n- Do not return a JSON schema.\n- Do not add extra fields.\n- Do not rename any field.\n- Do not return Markdown.\n- Do not add explanations before or after the JSON.\n- Do not claim that LinkedIn actions were actually executed.\n- Return the actual LinkedIn campaign strategy.\n- Return ONLY the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        432
+      ],
+      "id": "5f7f1e22-e623-48bd-b9d6-9272aeff917c",
+      "name": "22. AI AGENT - LinkedIn Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"linkedin_campaign_strategy\": \"Use LinkedIn as a professional B2B lead generation channel by combining educational thought leadership, targeted engagement, and relevant lead generation content for HR Managers and HR Directors in mid-sized companies.\",\n  \"targeting_strategy\": \"Focus on HR Managers and HR Directors working in companies with 100-1000 employees. Prioritize relevant industries, company sizes, seniority levels, and professional interests associated with mid-market HR leadership.\",\n  \"content_strategy\": \"Publish professional, educational, and value-driven content focused on HR scalability, operational efficiency, employee retention, compliance, and strategic HR transformation.\",\n  \"engagement_strategy\": \"Build relationships with HR decision-makers through meaningful engagement with relevant posts, industry discussions, and professional thought leadership before initiating personalized outreach.\",\n  \"lead_generation_strategy\": \"Convert qualified LinkedIn engagement into leads by offering valuable resources such as HR scaling guides, checklists, or strategic assessments and directing interested prospects toward an appropriate lead capture process.\",\n  \"outreach_strategy\": \"Use personalized and consultative LinkedIn outreach that references the prospect's professional context or relevant HR challenge instead of using generic sales messages.\",\n  \"ad_strategy\": \"Use professional lead-generation advertisements focused on specific mid-market HR pain points and clear business value while maintaining a strictly professional brand voice.\",\n  \"call_to_action\": \"Access the Mid-Market HR Scaling Guide\",\n  \"execution_checklist\": [\n    \"Define LinkedIn audience targeting parameters\",\n    \"Prepare and review LinkedIn content assets\",\n    \"Configure lead generation campaign targeting\",\n    \"Ensure messaging is consistent with the campaign strategy\",\n    \"Complete brand review before publication\",\n    \"Obtain required human approval before execution\"\n  ],\n  \"key_recommendations\": [\n    \"Prioritize lead quality over broad LinkedIn reach\",\n    \"Focus messaging on specific mid-market HR challenges\",\n    \"Use educational content to establish credibility\",\n    \"Personalize outreach to HR decision-makers\",\n    \"Maintain consistent messaging across LinkedIn and Email\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        656
+      ],
+      "id": "be9fbc66-f744-40e6-8411-60313ead1e81",
+      "name": "22.2 PARSER - LinkedIn Output"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        656
+      ],
+      "id": "b016fd0c-d1d8-40eb-9ff9-d1b9cd7556da",
+      "name": "22.1 MODEL - Gemini LinkedIn",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bb35c58c-2df6-4904-a559-7866a101109b",
+              "name": "assigned_agent",
+              "value": "Email Campaign Agent",
+              "type": "string"
+            },
+            {
+              "id": "480b4089-b2cb-4108-a802-fd71914bd9bb",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "b949922b-127c-45fb-890d-13e669313ea3",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "27f8f586-e88c-416a-9198-911d3d878a51",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "a28ab219-8acb-4ce5-954d-39b97eefaaf1",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}\n",
+              "type": "string"
+            },
+            {
+              "id": "0563f4ca-8321-4894-9288-427a3d0d4ab1",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "b042b0ea-f085-42ef-aa47-41fc9c251500",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        2144
+      ],
+      "id": "2ff810de-d0b9-4beb-afcf-055e9da21cdb",
+      "name": "23. DATA - Prepare Email Campaign Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Email Campaign Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to develop a professional B2B email marketing strategy and nurture sequence for the assigned campaign.\n\nYou are NOT responsible for actually sending emails or launching the campaign.\n\nDo not:\n- send emails\n- contact prospects\n- launch email campaigns\n- make external changes\n- claim that any email campaign has been executed\n\nYour output will be used by the Brand Review Agent, LinkedIn Agent, Marketing Manager, and downstream campaign execution workflow.\n\nUse the campaign information provided below as the primary context.\n\nEvaluate:\n\n1. Campaign objective\n2. Target audience\n3. Campaign summary\n4. Manager notes\n5. Campaign priority\n6. Human approval requirement\n\nThe email strategy must focus on qualified B2B lead generation for HR Managers and HR Directors working in companies with 100-1000 employees.\n\nThe email campaign should:\n- maintain a professional and consultative tone\n- address specific HR leadership challenges\n- provide value before making a sales request\n- support the overall campaign objective\n- align with LinkedIn messaging\n- prioritize qualified leads over volume\n- avoid exaggerated or unsupported claims\n- use clear and relevant calls to action\n\nCAMPAIGN CONTEXT\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\nNow develop the Email Campaign strategy.\n\nGenerate:\n\n1. Email Campaign Strategy\n\nExplain the overall email marketing strategy.\n\n2. Email Audience Strategy\n\nExplain how the target HR audience should be approached through email.\n\n3. Email Messaging Strategy\n\nExplain the main messaging themes and value propositions.\n\n4. Email Nurture Strategy\n\nExplain how prospects should move through the email sequence.\n\n5. Email Sequence\n\nCreate a professional multi-step email nurture sequence.\n\nEach email should contain:\n- email number\n- subject line\n- preview text\n- email body\n- call to action\n\n6. Personalization Strategy\n\nExplain how emails should be personalized for HR decision-makers.\n\n7. Lead Conversion Strategy\n\nExplain how email engagement should be converted into qualified B2B leads.\n\n8. Follow-up Strategy\n\nExplain how follow-ups should be handled without becoming intrusive.\n\n9. Key Recommendations\n\nProvide the most important actionable recommendations.\n\nReturn ONLY one valid JSON object.\n\nThe JSON MUST contain exactly these fields:\n\n{\n\"email_campaign_strategy\": \"string\",\n\"email_audience_strategy\": \"string\",\n\"email_messaging_strategy\": \"string\",\n\"email_nurture_strategy\": \"string\",\n\"email_sequence\": [\n  {\n    \"email_number\": \"string\",\n    \"subject_line\": \"string\",\n    \"preview_text\": \"string\",\n    \"email_body\": \"string\",\n    \"call_to_action\": \"string\"\n  }\n],\n\"personalization_strategy\": \"string\",\n\"lead_conversion_strategy\": \"string\",\n\"follow_up_strategy\": \"string\",\n\"key_recommendations\": [\"string\"]\n}\n\nRules:\n\n- String fields must contain a single string value.\n- email_sequence must be an array of objects.\n- Every email object must contain exactly these five fields:\n  email_number\n  subject_line\n  preview_text\n  email_body\n  call_to_action\n- key_recommendations must be an array of strings.\n- Every required field must be present.\n- Do not create an \"output\" field.\n- Do not create \"type\" fields.\n- Do not create \"properties\".\n- Do not create \"required\".\n- Do not return a JSON schema.\n- Do not add extra fields.\n- Do not rename any field.\n- Do not return Markdown.\n- Do not add explanations before or after the JSON.\n- Do not claim that emails were actually sent.\n- Return the actual email campaign strategy and sequence.\n- Return ONLY the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        2032
+      ],
+      "id": "3ecfcc90-c9b9-4f6c-b9dc-abd24fccde99",
+      "name": "24. AI AGENT - Email Campaign Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        2256
+      ],
+      "id": "b291b2ed-a10b-4cbb-850b-c672f319ff48",
+      "name": "24.1 MODEL - Gemini Email Campaign",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"email_campaign_strategy\": \"Use a professional B2B email nurture strategy that addresses the operational and strategic challenges faced by HR Managers and Directors in mid-sized organizations while providing practical value before introducing a consultation or sales conversation.\",\n  \"email_audience_strategy\": \"Target HR Managers and HR Directors in companies with 100-1000 employees, with messaging focused on scalability, operational efficiency, employee retention, compliance, and strategic HR leadership.\",\n  \"email_messaging_strategy\": \"Focus on problem-solution messaging that demonstrates an understanding of mid-market HR challenges and positions the company as a practical strategic partner.\",\n  \"email_nurture_strategy\": \"Use a multi-step sequence that begins with education and problem awareness, progresses toward practical solutions and strategic guidance, and ends with a relevant consultation or next-step invitation.\",\n  \"email_sequence\": [\n    {\n      \"email_number\": \"1\",\n      \"subject_line\": \"Scaling HR operations without adding complexity\",\n      \"preview_text\": \"A practical approach to common mid-market HR challenges.\",\n      \"email_body\": \"HR teams in growing organizations often find that processes that worked at a smaller scale become difficult to manage as the workforce expands. This can create administrative bottlenecks and reduce the time available for strategic initiatives. We have prepared practical guidance to help HR leaders identify and address these challenges.\",\n      \"call_to_action\": \"Access the HR Scaling Guide\"\n    },\n    {\n      \"email_number\": \"2\",\n      \"subject_line\": \"Where is your HR team losing the most time?\",\n      \"preview_text\": \"Identify the operational bottlenecks affecting HR efficiency.\",\n      \"email_body\": \"As HR organizations grow, fragmented processes and manual administration can make it harder to focus on workforce strategy. A structured approach to identifying operational bottlenecks can help HR leaders improve efficiency while maintaining employee experience and compliance.\",\n      \"call_to_action\": \"Review the HR Efficiency Framework\"\n    },\n    {\n      \"email_number\": \"3\",\n      \"subject_line\": \"Building a more scalable HR strategy\",\n      \"preview_text\": \"Practical considerations for sustainable HR growth.\",\n      \"email_body\": \"Scalable HR operations require more than adding technology or headcount. The strongest approaches align processes, people, and systems with broader organizational goals. We would be happy to discuss the specific challenges your HR team is facing and explore practical ways to improve scalability.\",\n      \"call_to_action\": \"Schedule a Brief Consultation\"\n    }\n  ],\n  \"personalization_strategy\": \"Personalize emails using the prospect's role, company size, relevant HR challenges, and previous engagement while avoiding overly familiar or intrusive messaging.\",\n  \"lead_conversion_strategy\": \"Use valuable resources, relevant CTAs, and progressive engagement to identify high-intent HR prospects before moving them toward a consultation or sales conversation.\",\n  \"follow_up_strategy\": \"Follow up with useful information related to the prospect's likely HR challenges and vary the messaging rather than repeatedly asking for a meeting.\",\n  \"key_recommendations\": [\n    \"Prioritize relevance and lead quality over email volume\",\n    \"Keep messaging focused on mid-market HR challenges\",\n    \"Provide value before making a sales request\",\n    \"Maintain consistency between LinkedIn and Email messaging\",\n    \"Use human review before campaign execution\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        2256
+      ],
+      "id": "c14f0586-ae93-4d39-a471-f2cc8ac05a29",
+      "name": "24.2 PARSER - Email Campaign Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "01c01a8c-93bd-4e1b-81c7-57778d77d78a",
+              "name": "assigned_agent",
+              "value": "Brand Review Agent",
+              "type": "string"
+            },
+            {
+              "id": "fad4929c-ec6d-473f-87d5-d3c1e6a55b7e",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}\n",
+              "type": "string"
+            },
+            {
+              "id": "ccbce9e0-5608-48cf-9a47-932149b89e0b",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}\n",
+              "type": "string"
+            },
+            {
+              "id": "24c7fb24-d41c-448b-8cbc-d8c1b257b4e8",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}\n",
+              "type": "string"
+            },
+            {
+              "id": "815e0994-fcee-4a6e-bb57-cc229a2734a5",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "65466e21-f784-42c3-994f-e07a41d14739",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}\n",
+              "type": "string"
+            },
+            {
+              "id": "d378f369-84c8-4cfa-a236-165044e14d9b",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        1744
+      ],
+      "id": "ffff3b4f-2fb9-4889-82fe-3b26c3c526d0",
+      "name": "25. DATA - Prepare Brand Review Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Brand Review Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to review marketing campaign strategy and content for brand consistency, professionalism, clarity, relevance, and quality before the campaign moves toward human approval or execution.\n\nYou are NOT responsible for executing the campaign.\n\nDo not:\n- publish LinkedIn content\n- send emails\n- launch advertisements\n- contact prospects\n- make external changes\n- approve the campaign on behalf of a human executive\n\nYour analysis will be used by the Human Approval Agent, Marketing Manager, LinkedIn Agent, and Email Campaign Agent.\n\nUse the campaign information provided below as the primary context.\n\nReview the campaign for:\n\n1. Professional brand voice\n2. Message clarity\n3. Relevance to the target audience\n4. Consistency with the campaign objective\n5. Consistency across LinkedIn and Email messaging\n6. Alignment with manager notes\n7. Accuracy and credibility of claims\n8. Quality of calls to action\n9. Potential reputational risks\n10. Overall brand readiness\n\nThe campaign targets HR Managers and HR Directors in companies with 100-1000 employees.\n\nThe brand review should ensure that the campaign:\n- uses a professional and consultative tone\n- avoids exaggerated marketing claims\n- avoids unsupported statistics or promises\n- focuses on genuine business value\n- addresses relevant mid-market HR challenges\n- avoids overly casual or aggressive sales language\n- maintains consistent messaging across channels\n- provides clear and useful calls to action\n- supports qualified B2B lead generation\n\nCAMPAIGN CONTEXT\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\nNow perform the brand review.\n\nGenerate:\n\n1. Brand Review Summary\n\nProvide a concise assessment of the overall brand quality and consistency.\n\n2. Brand Voice Assessment\n\nEvaluate whether the tone is professional, consultative, credible, and appropriate for HR decision-makers.\n\n3. Audience Relevance\n\nEvaluate whether the messaging is relevant to HR Managers and HR Directors in mid-sized companies.\n\n4. Messaging Consistency\n\nEvaluate whether the campaign messaging consistently supports the campaign objective.\n\n5. Content Quality\n\nIdentify strengths and weaknesses in the campaign content and messaging.\n\n6. Compliance and Credibility Risks\n\nIdentify unsupported claims, exaggerated promises, misleading statements, or other credibility concerns.\n\n7. Brand Risks\n\nIdentify potential risks that could negatively affect the company's professional reputation.\n\n8. Required Revisions\n\nList the changes that should be made before the campaign proceeds.\n\n9. Brand Readiness Score\n\nProvide an integer score from 0 to 100.\n\n10. Final Recommendation\n\nState whether the campaign is ready for human review or requires revisions first.\n\nReturn ONLY one valid JSON object.\n\nThe JSON MUST contain exactly these fields:\n\n{\n\"brand_review_summary\": \"string\",\n\"brand_voice_assessment\": \"string\",\n\"audience_relevance\": \"string\",\n\"messaging_consistency\": \"string\",\n\"content_quality\": \"string\",\n\"compliance_credibility_risks\": [\"string\"],\n\"brand_risks\": [\"string\"],\n\"required_revisions\": [\"string\"],\n\"brand_readiness_score\": 0,\n\"final_recommendation\": \"string\"\n}\n\nRules:\n\n- String fields must contain a single string value.\n- Array fields must contain only strings.\n- brand_readiness_score must be an integer between 0 and 100.\n- Every required field must be present.\n- Do not create an \"output\" field.\n- Do not create \"type\" fields.\n- Do not create \"properties\".\n- Do not create \"required\".\n- Do not return a JSON schema.\n- Do not add extra fields.\n- Do not rename any field.\n- Do not return Markdown.\n- Do not add explanations before or after the JSON.\n- Do not claim that any campaign action was executed.\n- Return the actual brand review.\n- Return ONLY the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        1632
+      ],
+      "id": "e4e434ec-4f69-44cb-870b-04d96720c780",
+      "name": "26. AI AGENT - Brand Review Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        1856
+      ],
+      "id": "d6f85aac-46ef-46dd-a0de-a15fcb2cf9ee",
+      "name": "26.1 MODEL - Gemini Brand Review",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"brand_review_summary\": \"The campaign maintains a professional B2B positioning focused on mid-market HR challenges and provides a strong foundation for human review.\",\n  \"brand_voice_assessment\": \"The messaging uses a professional, consultative, and business-focused tone appropriate for HR Managers and Directors. It should avoid overly promotional language and unsupported claims.\",\n  \"audience_relevance\": \"The campaign is relevant to HR decision-makers in companies with 100-1000 employees and addresses operational efficiency, scalability, employee retention, compliance, and strategic HR priorities.\",\n  \"messaging_consistency\": \"The campaign consistently focuses on qualified B2B lead generation and maintains a common emphasis on mid-market HR challenges across marketing messaging.\",\n  \"content_quality\": \"The content is clear, structured, and suitable for professional B2B communication. Messaging can be strengthened further through specific examples and practical value without introducing unsupported claims.\",\n  \"compliance_credibility_risks\": [\n    \"Avoid unsupported statistics or performance guarantees\",\n    \"Avoid claims that cannot be substantiated\",\n    \"Ensure all lead-generation claims remain factual and professional\"\n  ],\n  \"brand_risks\": [\n    \"Generic messaging could reduce differentiation from competing HR solutions\",\n    \"Overly promotional language could reduce credibility with senior HR decision-makers\",\n    \"Inconsistent messaging between LinkedIn and Email could weaken brand positioning\"\n  ],\n  \"required_revisions\": [\n    \"Strengthen messaging around specific mid-market HR challenges\",\n    \"Ensure LinkedIn and Email messaging use consistent positioning\",\n    \"Remove or revise any unsupported claims before publication\",\n    \"Maintain a professional and consultative tone across all campaign assets\"\n  ],\n  \"brand_readiness_score\": 88,\n  \"final_recommendation\": \"The campaign is sufficiently professional and relevant for human review, provided the identified messaging and credibility checks are completed before execution.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        1856
+      ],
+      "id": "cb3e8e6e-1232-47e7-abf9-14c307605089",
+      "name": "26.2 PARSER - Brand Review Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d60c4f61-7c25-4b45-ad1d-a19ad330cd75",
+              "name": "assigned_agent",
+              "value": "Analytics Agent",
+              "type": "string"
+            },
+            {
+              "id": "78a538f1-35c9-415b-bac9-01fb34d5a2a4",
+              "name": "campaign_objective",
+              "value": "=={{ $json.output.campaign_objective }}",
+              "type": "string"
+            },
+            {
+              "id": "1ebfab6e-ac84-4ed7-bf62-02b95a0c3dea",
+              "name": "target_audience",
+              "value": "=={{ $json.output.target_audience }}",
+              "type": "string"
+            },
+            {
+              "id": "425fe107-909d-4d65-bf87-134a18ab15bb",
+              "name": "campaign_summary",
+              "value": "=={{ $json.output.campaign_summary }}",
+              "type": "string"
+            },
+            {
+              "id": "26c704e9-dbc7-48e6-bc5a-c61cf8de189f",
+              "name": "manager_notes",
+              "value": "=={{ $json.output.manager_notes }}\n",
+              "type": "string"
+            },
+            {
+              "id": "af80b61d-591c-4bc8-b59c-9ddadfbb0d31",
+              "name": "campaign_priority",
+              "value": "=={{ $json.output.campaign_priority }}",
+              "type": "string"
+            },
+            {
+              "id": "4fcee25c-ae4b-417f-a1eb-ae9624622e74",
+              "name": "human_approval_required",
+              "value": "=={{ $json.output.human_approval_required }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        2544
+      ],
+      "id": "e2736a1e-ac0d-4df3-b2d7-1fc3577281b2",
+      "name": "27. DATA - Prepare Analytics Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Analytics Agent of an Enterprise AI Marketing Operations Team.\n\nYour responsibility is to define the measurement, tracking, reporting, and optimization strategy for the assigned B2B marketing campaign.\n\nYou are NOT responsible for actually executing the campaign or accessing live analytics platforms.\n\nDo not:\n\n- access live LinkedIn analytics\n- access live email analytics\n- claim that campaign data was collected\n- claim that leads were generated\n- claim that conversions occurred\n- launch campaigns\n- send emails\n- publish LinkedIn content\n- make external changes\n\nYour output will be used by the Marketing Manager and downstream campaign operations.\n\nUse the campaign information provided below as the primary context.\n\nThe campaign objective is to generate qualified B2B leads targeting HR leadership through integrated LinkedIn and Email marketing strategies.\n\nThe analytics strategy should prioritize:\n\n1. Lead quality\n2. Conversion performance\n3. LinkedIn engagement\n4. Email engagement\n5. Lead generation efficiency\n6. Channel performance\n7. Campaign optimization\n8. Alignment with the campaign objective\n\nDo not invent actual performance numbers.\n\nDo not claim that any KPI has already been achieved.\n\nWhere actual data is unavailable, provide recommended KPIs, measurement methods, benchmarks or decision rules rather than fabricated results.\n\nCAMPAIGN CONTEXT\n\nAssigned Agent:\n{{ $json.assigned_agent }}\n\nCampaign Objective:\n{{ $json.campaign_objective }}\n\nTarget Audience:\n{{ $json.target_audience }}\n\nCampaign Summary:\n{{ $json.campaign_summary }}\n\nManager Notes:\n{{ $json.manager_notes }}\n\nCampaign Priority:\n{{ $json.campaign_priority }}\n\nHuman Approval Required:\n{{ $json.human_approval_required }}\n\nNow develop the analytics and measurement strategy.\n\nGenerate:\n\n1. Analytics Strategy\n\nExplain the overall measurement approach for the campaign.\n\n2. Primary KPIs\n\nIdentify the most important KPIs for measuring campaign success.\n\n3. LinkedIn Metrics\n\nIdentify the important LinkedIn metrics that should be tracked.\n\n4. Email Metrics\n\nIdentify the important Email metrics that should be tracked.\n\n5. Lead Quality Metrics\n\nExplain how qualified lead quality should be evaluated.\n\n6. Conversion Metrics\n\nExplain how the campaign should measure movement from engagement to qualified lead and eventual conversion.\n\n7. Reporting Strategy\n\nExplain what should be included in campaign performance reports.\n\n8. Optimization Strategy\n\nExplain how performance data should be used to improve the campaign.\n\n9. Performance Risks\n\nIdentify measurement or campaign performance risks that should be monitored.\n\n10. Key Recommendations\n\nProvide the most important actionable recommendations.\n\nReturn ONLY one valid JSON object.\n\nThe JSON MUST contain exactly these fields:\n\n{\n\"analytics_strategy\": \"string\",\n\"primary_kpis\": [\"string\"],\n\"linkedin_metrics\": [\"string\"],\n\"email_metrics\": [\"string\"],\n\"lead_quality_metrics\": [\"string\"],\n\"conversion_metrics\": [\"string\"],\n\"reporting_strategy\": \"string\",\n\"optimization_strategy\": \"string\",\n\"performance_risks\": [\"string\"],\n\"key_recommendations\": [\"string\"]\n}\n\nRules:\n\n- String fields must contain a single string value.\n- Array fields must contain only strings.\n- Every required field must be present.\n- Do not create an \"output\" field.\n- Do not create \"type\" fields.\n- Do not create \"properties\".\n- Do not create \"required\".\n- Do not return a JSON schema.\n- Do not add extra fields.\n- Do not rename any field.\n- Do not return Markdown.\n- Do not add explanations before or after the JSON.\n- Do not invent actual campaign performance data.\n- Do not claim that analytics data has already been collected.\n- Return the actual analytics strategy.\n- Return ONLY the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2432,
+        2432
+      ],
+      "id": "ec0a5524-1f90-425b-b525-c780ffe0f280",
+      "name": "28. AI AGENT - Analytics Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        2656
+      ],
+      "id": "90503385-77c6-418a-bd12-f01de0ef4b16",
+      "name": "28.1 MODEL - Gemini Analytics",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCQ64bTHZ12vMvKp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"analytics_strategy\": \"Measure the campaign across LinkedIn and Email with primary emphasis on qualified B2B lead generation, lead quality, engagement, conversion performance, and channel efficiency. Use performance data to identify high-performing messages and continuously optimize campaign activity.\",\n  \"primary_kpis\": [\n    \"Number of qualified B2B leads\",\n    \"Lead qualification rate\",\n    \"Lead-to-opportunity conversion rate\",\n    \"Cost per qualified lead\",\n    \"Overall conversion rate\"\n  ],\n  \"linkedin_metrics\": [\n    \"Impressions\",\n    \"Engagement rate\",\n    \"Click-through rate\",\n    \"Lead form conversion rate\",\n    \"Cost per lead\",\n    \"Qualified leads generated\"\n  ],\n  \"email_metrics\": [\n    \"Delivery rate\",\n    \"Open rate\",\n    \"Click-through rate\",\n    \"Reply rate\",\n    \"Unsubscribe rate\",\n    \"Qualified leads generated\"\n  ],\n  \"lead_quality_metrics\": [\n    \"Job title and seniority relevance\",\n    \"Company size alignment with the 100-1000 employee target\",\n    \"Engagement and intent signals\",\n    \"Lead qualification rate\",\n    \"Lead-to-opportunity progression\"\n  ],\n  \"conversion_metrics\": [\n    \"Visitor-to-lead conversion rate\",\n    \"Lead-to-qualified-lead conversion rate\",\n    \"Qualified-lead-to-opportunity conversion rate\",\n    \"Cost per qualified lead\"\n  ],\n  \"reporting_strategy\": \"Provide regular campaign reports comparing LinkedIn and Email performance, lead quality, conversion trends, and campaign efficiency. Reports should highlight important changes, underperforming areas, and recommended actions.\",\n  \"optimization_strategy\": \"Use performance data to identify high-performing audiences, messaging, content, and channels. Improve targeting and messaging based on qualified lead performance rather than optimizing only for impressions or engagement.\",\n  \"performance_risks\": [\n    \"High engagement without sufficient qualified leads\",\n    \"Poor alignment between generated leads and the target HR audience\",\n    \"Low conversion despite strong LinkedIn or Email engagement\",\n    \"Insufficient tracking across LinkedIn and Email touchpoints\"\n  ],\n  \"key_recommendations\": [\n    \"Prioritize qualified lead volume and lead quality over vanity metrics\",\n    \"Track LinkedIn and Email performance together\",\n    \"Define clear qualification criteria before campaign launch\",\n    \"Monitor conversion performance at each stage of the funnel\",\n    \"Use performance data to continuously optimize campaign messaging and targeting\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        2656
+      ],
+      "id": "37b3bc34-a59a-4e2d-bbb0-391df005316e",
+      "name": "28.2 PARSER - Analytics Output"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 9,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2784,
+        1232
+      ],
+      "id": "78da180e-2418-4749-86b3-1f3c3f2c73f3",
+      "name": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n{\njson: {\ncampaign_id: Date.now().toString(),\ngenerated_at: new Date().toISOString(),\ncampaign_data: $json\n}\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3008,
+        1344
+      ],
+      "id": "6d0c7d90-b6a3-4daf-912d-bd2d53933be0",
+      "name": "30. Final Campaign Report"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Campaign_Master",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "campaign_status": "Completed ",
+            "overall_progress": "100",
+            "updated_at": "={{ $now }}",
+            "campaign_id": "campaign_id: $json.campaign_id"
+          },
+          "matchingColumns": [
+            "campaign_id"
+          ],
+          "schema": [
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company_name",
+              "displayName": "company_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact_name",
+              "displayName": "contact_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact_email",
+              "displayName": "contact_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_type",
+              "displayName": "campaign_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "business_goal",
+              "displayName": "business_goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "target_audience",
+              "displayName": "target_audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "primary_platforms",
+              "displayName": "primary_platforms",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "brand_voice",
+              "displayName": "brand_voice",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_deadline",
+              "displayName": "campaign_deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_priority",
+              "displayName": "campaign_priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_status",
+              "displayName": "campaign_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approval_required",
+              "displayName": "approval_required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "assigned_agents",
+              "displayName": "assigned_agents",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "overall_progress",
+              "displayName": "overall_progress",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        864
+      ],
+      "id": "a4a1488f-f217-4760-9b47-df00678a129a",
+      "name": "31. DB - Update Campaign Status",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1914689548,
+          "mode": "list",
+          "cachedResultName": "Research_Results",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=1914689548"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "research_id": "={{ $now.toMillis() }}",
+            "campaign_id": "={{ $json.campaign_data.campaign_id }}",
+            "generated_at": "={{ $now }}",
+            "market_research": "={{ JSON.stringify($json.campaign_data['14. AI - Competitor Analysis Agent']) }}",
+            "audience_research": "={{ JSON.stringify($json.campaign_data['16. AI - Audience Research Agent']) }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "research_id",
+              "displayName": "research_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "market_research",
+              "displayName": "market_research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "competitor_analysis",
+              "displayName": "competitor_analysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "audience_research",
+              "displayName": "audience_research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "seo_research",
+              "displayName": "seo_research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "generated_at",
+              "displayName": "generated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        1056
+      ],
+      "id": "08495f52-e3fe-4406-b4cc-c33c71852f35",
+      "name": "32. DB - Save Research Results",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 311123340,
+          "mode": "list",
+          "cachedResultName": "Content_Assets",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=311123340"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "asset_id": "={{ $now.toMillis() }}",
+            "campaign_id": "={{ $json.campaign_data.campaign_id }}",
+            "content_type": "All Content",
+            "platform": "={{ $json.campaign_data.primary_platforms }}",
+            "content_title": "Campaign Content Package",
+            "content_body": "={{ JSON.stringify({ content_writer: $json.campaign_data['18. AI - Content Writer Agent'], linkedin: $json.campaign_data['22. AI AGENT - LinkedIn Agent'], email: $json.campaign_data['24. AI AGENT - Email Campaign Agent'] }) }}",
+            "status": "Draft",
+            "generated_by": "AI Multi-Agent System",
+            "created_at": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "asset_id",
+              "displayName": "asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "content_type",
+              "displayName": "content_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "platform",
+              "displayName": "platform",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "content_title",
+              "displayName": "content_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "content_body",
+              "displayName": "content_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "generated_by",
+              "displayName": "generated_by",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        1248
+      ],
+      "id": "4c732bbb-4066-4682-a038-5db3a93880cb",
+      "name": "33. DB - Save Content Assets",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 228120409,
+          "mode": "list",
+          "cachedResultName": "Approval_Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=228120409"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "approval_id": "={{ $now.toMillis() }}",
+            "campaign_id": "={{ $json.campaign_data.campaign_id }}",
+            "reviewer": "AI Approval System",
+            "approval_status": "={{ $json.campaign_data['20. AI AGENT - Human Approval Agent'].approval_status }}",
+            "comments": "={{ JSON.stringify({ human_approval: $json.campaign_data['20. AI AGENT - Human Approval Agent'], brand_review: $json.campaign_data['26. AI AGENT - Brand Review Agent'] }) }}",
+            "approval_date": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "approval_id",
+              "displayName": "approval_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reviewer",
+              "displayName": "reviewer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approval_status",
+              "displayName": "approval_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comments",
+              "displayName": "comments",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approval_date",
+              "displayName": "approval_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        1440
+      ],
+      "id": "1ad204f5-ca5d-415d-9a27-d546c1504253",
+      "name": "34. DB - Save Approval Log",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1542427173,
+          "mode": "list",
+          "cachedResultName": "Execution_Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=1542427173"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "log_id": "={{ $now.toMillis() }}",
+            "campaign_id": "={{ $json.campaign_data.campaign_id }}",
+            "workflow_step": "Full Campaign Execution",
+            "agent_name": "={{ JSON.stringify($json.campaign_data['07. AI - Marketing Manager Agent'].recommended_agents) }}",
+            "execution_status": "Completed",
+            "execution_time": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "log_id",
+              "displayName": "log_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "workflow_step",
+              "displayName": "workflow_step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "agent_name",
+              "displayName": "agent_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "execution_status",
+              "displayName": "execution_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "execution_time",
+              "displayName": "execution_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        1632
+      ],
+      "id": "f1b18755-0864-4ed7-bfa3-09c4aeb0399d",
+      "name": "35. DB - Save Execution Log",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI",
+          "mode": "list",
+          "cachedResultName": "Enterprise AI Marketing Operations Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 694296038,
+          "mode": "list",
+          "cachedResultName": "Analytics",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-7jiAtuSJ8YtItQ7vn4HZAD34yQQbZmCmu5MIuc8KAI/edit#gid=694296038"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "report_id": "={{ $now.toMillis() }}",
+            "campaign_id": "={{ $json.campaign_data.campaign_id }}",
+            "total_assets_generated": "3",
+            "approval_rate": "={{ $json.campaign_data['20. AI AGENT - Human Approval Agent'].campaign_readiness_score }}",
+            "report_generated_at": "={{ $now }}",
+            "completion_status": "completed"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "report_id",
+              "displayName": "report_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "total_assets_generated",
+              "displayName": "total_assets_generated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approval_rate",
+              "displayName": "approval_rate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "completion_status",
+              "displayName": "completion_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "report_generated_at",
+              "displayName": "report_generated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3232,
+        1824
+      ],
+      "id": "d8b27fa3-1d3c-4c48-b8dd-1c7e2b8a7a2c",
+      "name": "36. DB - Save Analytics",
+      "credentials": {
+        "googleApi": {
+          "id": "jPxT6sAWdI8lTXyL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "     {\n       \"success\": false,\n       \"error\": \"Invalid campaign request\",\n       \"message\": \"One or more required fields are missing.\"\n     }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        512,
+        1056
+      ],
+      "id": "85290951-e709-423b-83ec-dc701eaa68c2",
+      "name": "03b. ERR - Invalid Request Response"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "=     {\n       \"success\": true,\n       \"message\": \"Campaign received and processing started\",\n       \"campaign_id\": \"={{ $json.campaign_id }}\"\n     }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1136,
+        1104
+      ],
+      "id": "b3be6539-6ce4-43cf-ad7b-233204ed4ed5",
+      "name": "06b. SUCCESS"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "02. DATA - Normalize Campaign Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "02. DATA - Normalize Campaign Payload": {
+      "main": [
+        [
+          {
+            "node": "03. VAL - Validate Campaign Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "03. VAL - Validate Campaign Request": {
+      "main": [
+        [
+          {
+            "node": "04. CMP - Initialize Campaign",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "03b. ERR - Invalid Request Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "04. CMP - Initialize Campaign": {
+      "main": [
+        [
+          {
+            "node": "05. CMP - Generate Campaign ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05. CMP - Generate Campaign ID": {
+      "main": [
+        [
+          {
+            "node": "06. DB - Create Campaign Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "06. DB - Create Campaign Record": {
+      "main": [
+        [
+          {
+            "node": "07. AI - Marketing Manager Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "06b. SUCCESS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "07.2 LLM - Gemini Marketing Intelligence Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "07. AI - Marketing Manager Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "07.1 PARSER - Marketing Manager Structured Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "07. AI - Marketing Manager Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "07. AI - Marketing Manager Agent": {
+      "main": [
+        [
+          {
+            "node": "08. DATA - Expand Agent Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "08. DATA - Expand Agent Queue": {
+      "main": [
+        [
+          {
+            "node": "09. DATA - Normalize Agent Assignment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "09. DATA - Normalize Agent Assignment": {
+      "main": [
+        [
+          {
+            "node": "10. ROUTER - Marketing Agent Dispatcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "10. ROUTER - Marketing Agent Dispatcher": {
+      "main": [
+        [
+          {
+            "node": "11. DATA - Prepare Market Research Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "13. DATA - Prepare Competitor Analysis Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "15. DATA - Prepare Audience Research Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "17. DATA - Prepare Content Writer Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "19. DATA - Prepare Human Approval Contex",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "21. DATA - Prepare LinkedIn Agent Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "23. DATA - Prepare Email Campaign Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "25. DATA - Prepare Brand Review Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "27. DATA - Prepare Analytics Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11. DATA - Prepare Market Research Context": {
+      "main": [
+        [
+          {
+            "node": "12. AI - Market Research Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12.1 LLM - Gemini Market Research": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "12. AI - Market Research Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12.2 PARSER - Market Research Structured Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "12. AI - Market Research Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12. AI - Market Research Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "13. DATA - Prepare Competitor Analysis Context": {
+      "main": [
+        [
+          {
+            "node": "14. AI - Competitor Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "14.2 PARSER - Competitor Analysis Structured Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "14. AI - Competitor Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "14.1 LLM - Gemini Competitor Analysis": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "14. AI - Competitor Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "15. DATA - Prepare Audience Research Context": {
+      "main": [
+        [
+          {
+            "node": "16. AI - Audience Research Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "16.1 LLM - Gemini Audience Research": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "16. AI - Audience Research Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "16.2 PARSER - Audience Research Structured Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "16. AI - Audience Research Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "17. DATA - Prepare Content Writer Context": {
+      "main": [
+        [
+          {
+            "node": "18. AI - Content Writer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "18.1 LLM - Gemini Content Writer": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "18. AI - Content Writer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "18.2 PARSER - Content Writer Structured Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "18. AI - Content Writer Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "19. DATA - Prepare Human Approval Contex": {
+      "main": [
+        [
+          {
+            "node": "20. AI AGENT - Human Approval Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "20.1 MODEL - Gemini Human Approval": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "20. AI AGENT - Human Approval Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "20.2 PARSER - Human Approval Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "20. AI AGENT - Human Approval Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "21. DATA - Prepare LinkedIn Agent Context": {
+      "main": [
+        [
+          {
+            "node": "22. AI AGENT - LinkedIn Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "22.2 PARSER - LinkedIn Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "22. AI AGENT - LinkedIn Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "22.1 MODEL - Gemini LinkedIn": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "22. AI AGENT - LinkedIn Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "23. DATA - Prepare Email Campaign Context": {
+      "main": [
+        [
+          {
+            "node": "24. AI AGENT - Email Campaign Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "24.1 MODEL - Gemini Email Campaign": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "24. AI AGENT - Email Campaign Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "24.2 PARSER - Email Campaign Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "24. AI AGENT - Email Campaign Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "25. DATA - Prepare Brand Review Context": {
+      "main": [
+        [
+          {
+            "node": "26. AI AGENT - Brand Review Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "26.1 MODEL - Gemini Brand Review": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "26. AI AGENT - Brand Review Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "26.2 PARSER - Brand Review Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "26. AI AGENT - Brand Review Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "27. DATA - Prepare Analytics Context": {
+      "main": [
+        [
+          {
+            "node": "28. AI AGENT - Analytics Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "28.1 MODEL - Gemini Analytics": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "28. AI AGENT - Analytics Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "28.2 PARSER - Analytics Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "28. AI AGENT - Analytics Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "14. AI - Competitor Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "16. AI - Audience Research Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "18. AI - Content Writer Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 8
+          }
+        ]
+      ]
+    },
+    "20. AI AGENT - Human Approval Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "26. AI AGENT - Brand Review Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "24. AI AGENT - Email Campaign Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 6
+          }
+        ]
+      ]
+    },
+    "22. AI AGENT - LinkedIn Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "28. AI AGENT - Analytics Agent": {
+      "main": [
+        [
+          {
+            "node": "29. MASTER CAMPAIGN INTELLIGENCE HUB",
+            "type": "main",
+            "index": 7
+          }
+        ]
+      ]
+    },
+    "29. MASTER CAMPAIGN INTELLIGENCE HUB": {
+      "main": [
+        [
+          {
+            "node": "30. Final Campaign Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "30. Final Campaign Report": {
+      "main": [
+        [
+          {
+            "node": "31. DB - Update Campaign Status",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "32. DB - Save Research Results",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "33. DB - Save Content Assets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "34. DB - Save Approval Log",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "35. DB - Save Execution Log",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "36. DB - Save Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "32. DB - Save Research Results": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "b4f6bbc1-5957-4f5f-89aa-d739955bfc36",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eb197799cbd0c2dc65911762932d57237c992fd519412d907f25906c0f0e8384"
+  },
+  "nodeGroups": [],
+  "id": "6ltgBpLoYA3XmdMd",
+  "tags": []
+}
