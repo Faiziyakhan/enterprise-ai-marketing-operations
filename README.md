@@ -154,7 +154,6 @@ Approval: Yes
 Progress: 0
 ```
 
-## Evidence & Testing
 
 ## Evidence & Verified Visual Proof
 
